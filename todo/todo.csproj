@@ -58,13 +58,13 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Images\Validator.cs" />
     <Compile Include="MainEmpty.xaml.cs">
       <DependentUpon>MainEmpty.xaml</DependentUpon>
     </Compile>
     <Compile Include="Reg.xaml.cs">
       <DependentUpon>Reg.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Validator.cs" />
     <Page Include="MainEmpty.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
