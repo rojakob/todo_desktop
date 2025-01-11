@@ -74,6 +74,7 @@ FontSize="20">
           FontSize="20">
             </TextBox>
             <Button Grid.Row="9"
+                    x:Name="regbut2"
                     Height="50"
                     Foreground="White"
                     VerticalAlignment="Bottom"
@@ -87,7 +88,8 @@ FontSize="20">
                 Зарегистрироваться
             </Button>
 
-            <Button Grid.Row="10"
+            <Button x:Name="backbut1"
+                Grid.Row="10"
          Height="50"
          Foreground="White"
          VerticalAlignment="Bottom"
