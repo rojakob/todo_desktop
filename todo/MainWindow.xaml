@@ -73,7 +73,7 @@
                     Foreground="White"
                     Background="#FFF96060" 
                     FontSize="20"
-                    Content="Войти">
+                    Content="Войти" Click="loginbut1_Click">
                 <Button.Resources>
                     <Style TargetType="Border">
                         <Setter Property="CornerRadius" Value="20,20,5,5"/>
@@ -87,7 +87,7 @@
         FontSize="20"
                     Height="60"
         Background="#FFF96060" 
-        Content="Зарегистрироваться">
+        Content="Зарегистрироваться" Click="regbut1_Click">
                 <Button.Resources>
                     <Style TargetType="Border">
                         <Setter Property="CornerRadius" Value="5,5,20,20"/>

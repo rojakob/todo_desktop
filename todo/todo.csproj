@@ -64,6 +64,7 @@
     <Compile Include="Reg.xaml.cs">
       <DependentUpon>Reg.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Repository\UserRepository.cs" />
     <Compile Include="Validator.cs" />
     <Page Include="MainEmpty.xaml">
       <SubType>Designer</SubType>
@@ -123,6 +124,12 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\profile.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Entities\Entities.csproj">
+      <Project>{7448c2cc-678a-42c9-bda1-3cf4e11e5db7}</Project>
+      <Name>Entities</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

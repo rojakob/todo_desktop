@@ -35,6 +35,7 @@
             <Label Grid.Row="1" VerticalAlignment="Bottom" FontSize="20">Имя пользователя
             </Label>
             <TextBox Grid.Row="2"
+                     x:Name="name_textbox"
                      BorderBrush="Black"
                      Height="30"
                      VerticalAlignment="Bottom"
@@ -45,6 +46,7 @@
                 Ваша почта
             </Label>
             <TextBox Grid.Row="4"
+                     x:Name="email_textbox"
          BorderBrush="Black"
          Height="30"
          VerticalAlignment="Bottom"
@@ -56,6 +58,7 @@
                    FontSize="20">Пароль
             </Label>
             <TextBox Grid.Row="6"
+                     x:Name="pass1_textbox"
 BorderBrush="Black"
 Height="30"
 VerticalAlignment="Bottom"
@@ -67,6 +70,7 @@ FontSize="20">
                    FontSize="20"> Повторите пароль
             </Label>
             <TextBox Grid.Row="8"
+                     x:Name="pass2_textbox"
           BorderBrush="Black"
           Height="30"
           VerticalAlignment="Bottom"
@@ -79,7 +83,7 @@ FontSize="20">
                     Foreground="White"
                     VerticalAlignment="Bottom"
                     FontSize="20"
-                    Background="#FFF96060">
+                    Background="#FFF96060" Click="regbut2_Click">
                 <Button.Resources>
                     <Style TargetType="Border">
                         <Setter Property="CornerRadius" Value="20,20,5,5"/>
@@ -94,7 +98,7 @@ FontSize="20">
          Foreground="White"
          VerticalAlignment="Bottom"
          FontSize="20"
-         Background="#FFF96060">
+         Background="#FFF96060" Click="backbut1_Click">
                 <Button.Resources>
                     <Style TargetType="Border">
                         <Setter Property="CornerRadius" Value="5,5,20,20"/>
