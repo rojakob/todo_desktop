@@ -1,0 +1,122 @@
+﻿<Window x:Class="todo.Main"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:todo"
+        xmlns:components="clr-namespace:todo.Components"
+        mc:Ignorable="d"
+        Title="Main" Height="600" Width="800">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="100" />
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <StackPanel Grid.Column="0">
+            <Image Source="/Images/profile.png" Margin="10" />
+            <Label x:Name="nameLabel" FontSize="20" Height="40" Content="Alex" HorizontalContentAlignment="Center" Initialized="nameLabel_Initialized" />
+
+            <Button x:Name="btn_tasks" Background="Transparent" BorderThickness="0" Content="Задачи" FontSize="20" Foreground="Brown" Height="50" Margin="0,30,0,0"/>
+            <Button x:Name="btn_history" Background="Transparent" BorderThickness="0" Content="История" FontSize="20" Foreground="Brown" Height="50" Click="btn_history_Click"/>
+
+            <Button  VerticalAlignment="Bottom" Margin="0,230,0,0" Height="60" Width="60" Content="+" Background="#FFF96060" Foreground="White" FontSize="35" VerticalContentAlignment="Top" HorizontalContentAlignment="Center" Click="Button_Click">
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="100"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+        </StackPanel>
+
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="80"/>
+                <RowDefinition Height="60"/>
+                <RowDefinition/>
+                <RowDefinition Height="60"/>
+            </Grid.RowDefinitions>
+            <StackPanel Grid.Row="1" Orientation="Horizontal">
+                <Button x:Name="cat_house"  Background="Transparent" BorderThickness="0" FontSize="20" Content="Дом" Foreground="Green" Width="80"/>
+                <Button x:Name="cat_work" Background="Transparent" BorderThickness="0" FontSize="20" Content="Работа" Foreground="DarkOrange" Width="80"/>
+                <Button x:Name="cat_study" Background="Transparent" BorderThickness="0" FontSize="20" Content="Учеба" Foreground="Blue" Width="80"/>
+                <Button x:Name="cat_rest" Background="Transparent" BorderThickness="0" FontSize="20" Content="Отдых" Foreground="DarkViolet" Width="80"/>
+            </StackPanel>
+
+            <ScrollViewer x:Name="scroll_tasks" Margin="0,5,0,0" Grid.Row="2" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Hidden">
+                <StackPanel Orientation="Vertical">
+                    <components:TaskControl>
+                        <components:TaskControl.Effect>
+                            <DropShadowEffect BlurRadius="10" ShadowDepth="5" Opacity="0.2"/>
+                        </components:TaskControl.Effect>
+                    </components:TaskControl>
+                </StackPanel>
+            </ScrollViewer>
+
+        </Grid>
+
+        <Grid Grid.Column="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="80"/>
+                <RowDefinition/>
+                <RowDefinition Height="80"/>
+            </Grid.RowDefinitions>
+            <Border Grid.Row="1" BorderThickness="2" BorderBrush="Black" Margin="20">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="60"/>
+                        <RowDefinition Height="70"/>
+                        <RowDefinition/>
+                        <RowDefinition Height="60"/>
+                        <RowDefinition Height="60"/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock x:Name="title_task_label" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="30" Margin="5" Text="Заголовок">
+                    </TextBlock>
+                    <StackPanel Grid.Row="1" >
+                        <TextBlock x:Name="time_task_label" Grid.Row="1" FontSize="20" Text="18:00" Margin="5,5,5,0"  />
+                        <TextBlock x:Name="date_task_label" Grid.Row="1" FontSize="20" Text="01 Января 2022" Margin="5,0,5,5"  />
+                    </StackPanel>
+
+                    <TextBlock x:Name="descriptioon_task_label" Margin="5" Grid.Row="2" FontSize="20" Text="Lorem ipsum dolor sit amet, consectetur adipiscing." TextWrapping="Wrap" />
+
+
+
+                    <Button x:Name="done_btn"
+                            VerticalAlignment="Bottom"
+                            Grid.Row="3"
+                            Margin="20,5,20,5" 
+                            Height="40"
+                            Foreground="White"
+                            Background="#FFF96060" 
+                            FontSize="20"
+                            Content="Готово">
+                        <Button.Resources>
+                            <Style TargetType="Border">
+                                <Setter Property="CornerRadius" Value="20,20,5,5"/>
+                            </Style>
+                        </Button.Resources>
+                    </Button>
+
+                    <Button x:Name="delete_btn"
+                            Grid.Row="4"
+                            Margin="20,5,20,5" 
+                            Height="40"
+                            Foreground="White"
+                            Background="#FFF96060" 
+                            FontSize="20"
+                            VerticalAlignment="Top"
+                            Content="Удалить">
+                        <Button.Resources>
+                            <Style TargetType="Border">
+                                <Setter Property="CornerRadius" Value="5,5,20,20"/>
+                            </Style>
+                        </Button.Resources>
+                    </Button>
+
+                </Grid>
+            </Border>
+        </Grid>
+
+    </Grid>
+</Window>

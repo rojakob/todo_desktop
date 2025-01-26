@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Entities;
 using todo.Repository;
 
 namespace todo
@@ -31,6 +32,8 @@ namespace todo
             var email = email_textbox.Text;
             var pass1 = pass1_textbox.Text;
             var pass2 = pass2_textbox.Text;
+
+           
 
             try
             {

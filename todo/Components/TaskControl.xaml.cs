@@ -10,24 +10,19 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace todo
+namespace todo.Components
 {
     /// <summary>
-    /// Логика взаимодействия для MainEmpty.xaml
+    /// Логика взаимодействия для TaskControl.xaml
     /// </summary>
-    public partial class MainEmpty : Window
+    public partial class TaskControl : UserControl
     {
-        public MainEmpty()
+        public TaskControl()
         {
             InitializeComponent();
-        }
-
-        private void create_first_task_Click(object sender, RoutedEventArgs e)
-        {
-            new Create_task().Show();
-            Close();
         }
     }
 }

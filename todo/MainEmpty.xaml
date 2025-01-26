@@ -34,7 +34,7 @@
                     Foreground="White"
                     Margin="0,0,150,0"
                     Height="60"
-                    FontSize="20">
+                    FontSize="20" Click="create_first_task_Click">
                 <Button.Resources>
                     <Style TargetType="Border">
                         <Setter Property="CornerRadius" Value="20"/>

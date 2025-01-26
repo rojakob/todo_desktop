@@ -15,19 +15,13 @@ using System.Windows.Shapes;
 namespace todo
 {
     /// <summary>
-    /// Логика взаимодействия для MainEmpty.xaml
+    /// Логика взаимодействия для History.xaml
     /// </summary>
-    public partial class MainEmpty : Window
+    public partial class History : Window
     {
-        public MainEmpty()
+        public History()
         {
             InitializeComponent();
-        }
-
-        private void create_first_task_Click(object sender, RoutedEventArgs e)
-        {
-            new Create_task().Show();
-            Close();
         }
     }
 }

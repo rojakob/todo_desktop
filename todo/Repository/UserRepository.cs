@@ -11,6 +11,7 @@ namespace todo.Repository
     {
         private static UserRepository UserRepositoryInstance;
 
+        
         public static UserRepository GetInstance()
         {
             if (UserRepositoryInstance == null)
@@ -22,6 +23,9 @@ namespace todo.Repository
         }
 
         private List<UserModel> users = new List<UserModel>();
+
+        public static UserModel currentUser;
+
 
 
         public UserModel GetUserByEmail(string email)
@@ -57,6 +61,7 @@ namespace todo.Repository
             }
             
             users.Add(user);
+            currentUser = user;
             return user;
         }
 

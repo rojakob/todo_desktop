@@ -31,7 +31,7 @@ namespace todo
             return true;
 
         }
-        public static bool IsValidName(string name)
+        public static bool IsValidName(string name) // А как же ЯН?
         {
             if (name.Length < 3)
             {
