@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Xml.Linq;
 using todo.Repository;
 
 namespace todo
@@ -24,6 +25,7 @@ namespace todo
         public MainWindow()
         {
             InitializeComponent();
+            UserRepository.GetInstance().Register(new Entities.UserModel() { Email = "jacob@ai.com", Name = "jacob", Pass = "123456" }, "123456");
         }
 
         private void loginbut1_Click(object sender, RoutedEventArgs e)

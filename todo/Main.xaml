@@ -45,7 +45,7 @@
 
             <ScrollViewer x:Name="scroll_tasks" Margin="0,5,0,0" Grid.Row="2" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Hidden">
                 <StackPanel Orientation="Vertical">
-                    <components:TaskControl>
+                    <components:TaskControl Loaded="TaskControl_Loaded" MouseDoubleClick="TaskControl_MouseDoubleClick">
                         <components:TaskControl.Effect>
                             <DropShadowEffect BlurRadius="10" ShadowDepth="5" Opacity="0.2"/>
                         </components:TaskControl.Effect>
@@ -78,7 +78,7 @@
                         <TextBlock x:Name="date_task_label" Grid.Row="1" FontSize="20" Text="01 Января 2022" Margin="5,0,5,5"  />
                     </StackPanel>
 
-                    <TextBlock x:Name="descriptioon_task_label" Margin="5" Grid.Row="2" FontSize="20" Text="Lorem ipsum dolor sit amet, consectetur adipiscing." TextWrapping="Wrap" />
+                    <TextBlock x:Name="description_task_label" Margin="5" Grid.Row="2" FontSize="20" Text="Lorem ipsum dolor sit amet, consectetur adipiscing." TextWrapping="Wrap" />
 
 
 
@@ -90,7 +90,7 @@
                             Foreground="White"
                             Background="#FFF96060" 
                             FontSize="20"
-                            Content="Готово">
+                            Content="Готово" Click="done_btn_Click">
                         <Button.Resources>
                             <Style TargetType="Border">
                                 <Setter Property="CornerRadius" Value="20,20,5,5"/>
@@ -106,7 +106,7 @@
                             Background="#FFF96060" 
                             FontSize="20"
                             VerticalAlignment="Top"
-                            Content="Удалить">
+                            Content="Удалить" Click="delete_btn_Click">
                         <Button.Resources>
                             <Style TargetType="Border">
                                 <Setter Property="CornerRadius" Value="5,5,20,20"/>

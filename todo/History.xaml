@@ -17,10 +17,10 @@
             <Image Source="/Images/profile.png" Margin="10" />
             <Label x:Name="nameLabel" FontSize="20" Height="40" Content="Alex" HorizontalContentAlignment="Center" />
 
-            <Button x:Name="btn_tasks" Background="Transparent" BorderThickness="0" Content="Задачи" FontSize="20" Foreground="Brown" Height="50" Margin="0,30,0,0"/>
-            <Button x:Name="btn_history" Background="Transparent" BorderThickness="0" Content="История" FontSize="20" Foreground="Brown" Height="50"/>
+            <Button x:Name="btn_tasks" Background="Transparent" BorderThickness="0" Content="Задачи" FontSize="20" Foreground="Brown" Height="50" Margin="0,30,0,0" Click="btn_tasks_Click"/>
+            <Button x:Name="btn_history" Background="Transparent" BorderThickness="0" Content="История" FontSize="20" Foreground="Brown" Height="50" Click="btn_history_Click"/>
 
-            <Button VerticalAlignment="Bottom" Margin="0,230,0,0" Height="60" Width="60" Content="+" Background="#FFF96060" Foreground="White" FontSize="35" VerticalContentAlignment="Top" HorizontalContentAlignment="Center">
+            <Button x:Name="add_new_task" VerticalAlignment="Bottom" Margin="0,230,0,0" Height="60" Width="60" Content="+" Background="#FFF96060" Foreground="White" FontSize="35" VerticalContentAlignment="Top" HorizontalContentAlignment="Center" Click="add_new_task_Click">
                 <Button.Resources>
                     <Style TargetType="Border">
                         <Setter Property="CornerRadius" Value="100"/>
@@ -43,9 +43,9 @@
                 <Button x:Name="cat_rest" Background="Transparent" BorderThickness="0" FontSize="20" Content="Отдых" Foreground="DarkViolet" Width="80"/>
             </StackPanel>
 
-            <ScrollViewer Margin="0,5,0,0" Grid.Row="2" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Hidden">
+            <ScrollViewer x:Name="scroll_tasks" Margin="0,5,0,0" Grid.Row="2" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Hidden">
                 <StackPanel Orientation="Vertical">
-                    <components:TaskControl>
+                    <components:TaskControl MouseDoubleClick="TaskControl_MouseDoubleClick">
                         <components:TaskControl.Effect>
                             <DropShadowEffect BlurRadius="10" ShadowDepth="5" Opacity="0.2"/>
                             
