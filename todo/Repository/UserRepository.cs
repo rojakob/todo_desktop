@@ -3,15 +3,25 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Entities;
+
+using todo.ApplicationData;
 
 namespace todo.Repository
 {
     internal class UserRepository
     {
+
+        public static bool UserHasTasks(int userId)
+        {
+            using (var context = new todoEntities())
+            {
+                // Проверяем, есть ли задачи у пользователя с указанным ID
+                return context.TaskModel.Any(t => t.Id_usera == userId);
+            }
+        }
+
         private static UserRepository UserRepositoryInstance;
 
-        
         public static UserRepository GetInstance()
         {
             if (UserRepositoryInstance == null)
@@ -22,22 +32,19 @@ namespace todo.Repository
             return UserRepositoryInstance;
         }
 
-        private List<UserModel> users = new List<UserModel>();
-
-
-
         public static UserModel currentUser;
-
-
 
         public UserModel GetUserByEmail(string email)
         {
-            return users.Find((user) => user.Email == email);
+            using (var context = new todoEntities())
+            {
+                return context.UserModel.FirstOrDefault(user => user.Email == email);
+            }
         }
 
         public UserModel Register(UserModel user, string pass2)
         {
-            if (!Validator.IsMatchPass(user.Pass,pass2))
+            if (!Validator.IsMatchPass(user.Pass, pass2))
             {
                 throw new Exception("Пароли не совпадают!");
             }
@@ -61,8 +68,13 @@ namespace todo.Repository
             {
                 throw new Exception("Пользователь с таким e-mail уже существует!");
             }
-            
-            users.Add(user);
+
+            using (var context = new todoEntities())
+            {
+                context.UserModel.Add(user);
+                context.SaveChanges();
+            }
+
             currentUser = user;
             return user;
         }
@@ -73,7 +85,7 @@ namespace todo.Repository
 
             if (userResult == null)
             {
-                throw new Exception("Неверный e-mail!");
+                throw new Exception("Такого пользователя нет в базе!");
             }
 
             if (userResult.Pass != password)
@@ -81,8 +93,8 @@ namespace todo.Repository
                 throw new Exception("Неверный пароль!");
             }
 
+            currentUser = userResult;
             return userResult;
         }
-
     }
 }

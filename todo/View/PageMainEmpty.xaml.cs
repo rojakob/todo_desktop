@@ -10,24 +10,25 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
+using todo.ApplicationData;
 
-namespace todo
+namespace todo.View
 {
     /// <summary>
-    /// Логика взаимодействия для MainEmpty.xaml
+    /// Логика взаимодействия для PageMainEmpty.xaml
     /// </summary>
-    public partial class MainEmpty : Window
+    public partial class PageMainEmpty : Page
     {
-        public MainEmpty()
+        public PageMainEmpty()
         {
             InitializeComponent();
         }
 
         private void create_first_task_Click(object sender, RoutedEventArgs e)
         {
-            new Create_task().Show();
-            Close();
+            AppFrame.frameMain.Navigate(new PageCreateTask());
         }
     }
 }

@@ -1,11 +1,17 @@
-﻿<Window x:Class="todo.Reg"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:todo"
-        mc:Ignorable="d"
-        Title="Регистрация" Height="600" Width="800">
+﻿<Page x:Class="todo.View.PageRegistration"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:todo.View"
+      mc:Ignorable="d" 
+      Background="White"
+      d:DesignHeight="600" d:DesignWidth="800"
+      Title="Регистрация">
+
+   
+
+
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
@@ -30,9 +36,9 @@
                 <RowDefinition Height="55"/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
-            <Label Grid.Row="0" VerticalAlignment="Bottom" FontSize="32">Welcome back
+            <Label x:Name="lb_Welcome_back" Grid.Row="0" VerticalAlignment="Bottom" FontSize="32">Welcome back
             </Label>
-            <Label Grid.Row="1" VerticalAlignment="Bottom" FontSize="20">Имя пользователя
+            <Label x:Name="lb_username" Grid.Row="1" VerticalAlignment="Bottom" FontSize="20">Имя пользователя
             </Label>
             <TextBox Grid.Row="2"
                      x:Name="name_textbox"
@@ -40,9 +46,9 @@
                      Height="30"
                      VerticalAlignment="Bottom"
                      BorderThickness="0,0,0,1"
-                     FontSize="20"> 
+                     FontSize="20">
             </TextBox>
-            <Label Grid.Row="3" VerticalAlignment="Bottom" FontSize="20">
+            <Label x:Name="lb_yourmail" Grid.Row="3" VerticalAlignment="Bottom" FontSize="20">
                 Ваша почта
             </Label>
             <TextBox Grid.Row="4"
@@ -53,7 +59,7 @@
          BorderThickness="0,0,0,1"
          FontSize="20">
             </TextBox>
-            <Label Grid.Row="5"
+            <Label x:Name="lb_pass" Grid.Row="5"
                    VerticalAlignment="Bottom"
                    FontSize="20">Пароль
             </Label>
@@ -65,9 +71,9 @@ VerticalAlignment="Bottom"
 BorderThickness="0,0,0,1"
 FontSize="20">
             </TextBox>
-            <Label Grid.Row="7"
+            <Label x:Name="lb_repeat_pass" Grid.Row="7"
                    VerticalAlignment="Bottom"
-                   FontSize="20"> Повторите пароль
+                   FontSize="20">Повторите пароль
             </Label>
             <TextBox Grid.Row="8"
                      x:Name="pass2_textbox"
@@ -83,7 +89,7 @@ FontSize="20">
                     Foreground="White"
                     VerticalAlignment="Bottom"
                     FontSize="20"
-                    Background="#FFF96060" Click="regbut2_Click">
+                    Background="#FFF96060" Click="regbut2_Click" >
                 <Button.Resources>
                     <Style TargetType="Border">
                         <Setter Property="CornerRadius" Value="20,20,5,5"/>
@@ -98,7 +104,7 @@ FontSize="20">
          Foreground="White"
          VerticalAlignment="Bottom"
          FontSize="20"
-         Background="#FFF96060" Click="backbut1_Click">
+         Background="#FFF96060" Click="backbut1_Click" >
                 <Button.Resources>
                     <Style TargetType="Border">
                         <Setter Property="CornerRadius" Value="5,5,20,20"/>
@@ -118,7 +124,7 @@ FontSize="20">
                 <RowDefinition Height="150"/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
-            <Image Grid.Row="1" Grid.Column="1" Source="Images/logo.png"/>
+            <Image x:Name="img_logo" Grid.Row="1" Grid.Column="1" Source="/Images/logo.png"/>
         </Grid>
     </Grid>
-</Window>
+</Page>

@@ -38,8 +38,17 @@
     <ApplicationIcon>logo.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -58,46 +67,63 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ApplicationData\AppConnect.cs" />
+    <Compile Include="ApplicationData\AppFrame.cs" />
+    <Compile Include="ApplicationData\sp_helpdiagramdefinition_Result.cs">
+      <DependentUpon>todoModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ApplicationData\sp_helpdiagrams_Result.cs">
+      <DependentUpon>todoModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ApplicationData\sysdiagrams.cs">
+      <DependentUpon>todoModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ApplicationData\TaskModel.cs">
+      <DependentUpon>todoModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ApplicationData\todoModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>todoModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ApplicationData\todoModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>todoModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ApplicationData\todoModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>todoModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="ApplicationData\UserModel.cs">
+      <DependentUpon>todoModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Components\TaskControl.xaml.cs">
       <DependentUpon>TaskControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Create_task.xaml.cs">
-      <DependentUpon>Create_task.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="History.xaml.cs">
-      <DependentUpon>History.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Main.xaml.cs">
-      <DependentUpon>Main.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="MainEmpty.xaml.cs">
-      <DependentUpon>MainEmpty.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Reg.xaml.cs">
-      <DependentUpon>Reg.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Repository\UserRepository.cs" />
-    <Compile Include="Task\TaskModel.cs" />
-    <Compile Include="Task\TaskRepos.cs" />
     <Compile Include="Task\TaskRepository.cs" />
     <Compile Include="Validator.cs" />
+    <Compile Include="View\PageCreateTask.xaml.cs">
+      <DependentUpon>PageCreateTask.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\PageHistory.xaml.cs">
+      <DependentUpon>PageHistory.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\PageLogin.xaml.cs">
+      <DependentUpon>PageLogin.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\PageMain.xaml.cs">
+      <DependentUpon>PageMain.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\PageMainEmpty.xaml.cs">
+      <DependentUpon>PageMainEmpty.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\PageRegistration.xaml.cs">
+      <DependentUpon>PageRegistration.xaml</DependentUpon>
+    </Compile>
     <Page Include="Components\TaskControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Create_task.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="History.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Main.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="MainEmpty.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -113,7 +139,27 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Reg.xaml">
+    <Page Include="View\PageCreateTask.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\PageHistory.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\PageLogin.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\PageMain.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\PageMainEmpty.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\PageRegistration.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -136,6 +182,14 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EntityDeploy Include="ApplicationData\todoModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>todoModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="ApplicationData\todoModel.edmx.diagram">
+      <DependentUpon>todoModel.edmx</DependentUpon>
+    </None>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -163,5 +217,20 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />
+  <ItemGroup>
+    <Content Include="ApplicationData\todoModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>todoModel.Context.cs</LastGenOutput>
+      <DependentUpon>todoModel.edmx</DependentUpon>
+    </Content>
+    <Content Include="ApplicationData\todoModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>todoModel.edmx</DependentUpon>
+      <LastGenOutput>todoModel.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

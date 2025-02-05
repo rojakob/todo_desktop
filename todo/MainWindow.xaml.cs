@@ -13,7 +13,9 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Xml.Linq;
+using todo.ApplicationData;
 using todo.Repository;
+using todo.View;
 
 namespace todo
 {
@@ -25,32 +27,12 @@ namespace todo
         public MainWindow()
         {
             InitializeComponent();
-            UserRepository.GetInstance().Register(new Entities.UserModel() { Email = "jacob@ai.com", Name = "jacob", Pass = "123456" }, "123456");
+            AppConnect.todoModel = new todoEntities();
+            AppFrame.frameMain = FrmMain;
+            FrmMain.Navigate(new PageLogin());
+            
         }
 
-        private void loginbut1_Click(object sender, RoutedEventArgs e)
-        {
-            var email = mailbox1.Text;
-            var pass = passbox1.Password;
 
-            try 
-            { 
-                UserRepository.GetInstance().Login(email, pass); 
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error);
-                return;
-            }
-
-            new MainEmpty().Show();
-            Close();
-        }
-
-        private void regbut1_Click(object sender, RoutedEventArgs e)
-        {
-            new Reg().Show();
-            Close();
-        }
     }
 }
