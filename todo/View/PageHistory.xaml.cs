@@ -120,7 +120,8 @@ namespace todo.View
 
             
 
-            currentTaskControl.fon.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#ABF294")); */
+            */
+            //currentTaskControl.fon.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#ABF294")); 
 
             
 

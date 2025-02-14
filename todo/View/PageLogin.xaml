@@ -85,7 +85,29 @@
                         <Setter Property="CornerRadius" Value="20,20,5,5"/>
                     </Style>
                 </Button.Resources>
-                
+                <Button.Triggers>
+                    <!-- Триггер для события MouseEnter -->
+                    <EventTrigger RoutedEvent="Button.MouseEnter">
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <!-- Анимация изменения свойства Margin -->
+                                <ThicknessAnimation Duration="0:0:0.2" To="5,5,105,5" 
+                                                 Storyboard.TargetProperty="Margin"/>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger>
+
+                    <!-- Триггер для события MouseLeave -->
+                    <EventTrigger RoutedEvent="Button.MouseLeave">
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <!-- Анимация возврата свойства Margin к исходному значению -->
+                                <ThicknessAnimation Duration="0:0:0.2" To="0,0,100,0" 
+                                                 Storyboard.TargetProperty="Margin"/>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger>
+                </Button.Triggers>
             </Button>
             <Button x:Name="regbut1"
             Grid.Row="7"
