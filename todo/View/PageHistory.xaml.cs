@@ -34,40 +34,45 @@ namespace todo.View
 
         todoEntities context = new todoEntities();
 
-        private void LoadTasks()
-        {
+
+        //private async void LoadTasks()
+        //{
+
+        //    var tasks = await TaskRepository.GetAllUserTasks();
+
+        //    // Очищаем StackPanel перед добавлением новых элементов
+        //    scroll_tasks.Content = new StackPanel();
+        //    var stackPanel = (StackPanel)scroll_tasks.Content;
 
 
-            // Очищаем StackPanel перед добавлением новых элементов
-            scroll_tasks.Content = new StackPanel();
-            var stackPanel = (StackPanel)scroll_tasks.Content;
+        //    // Проходимся по списку задач и создаем TaskControl для каждой
+        //    foreach (var task in tasks)
+        //    {
+        //        if (tasks != null)
+        //        {
+        //            if (task.isCompleted == true)
+        //            {
 
-           
-                // Проходимся по списку задач и создаем TaskControl для каждой
-                foreach (var task in context.TaskModel)
-                {
-                    // Создаем новый TaskControl
-                    if (task.Completed == true)
-                    {
-                        TaskControl taskControl = new TaskControl();
-                        // Устанавливаем значения для task_title и task_time
-                        taskControl.task_title.Text = task.Name;
-                        taskControl.task_time.Text = task.Time;
-                        taskControl.task_title.TextDecorations = TextDecorations.Strikethrough;
-                        taskControl.task_time.TextDecorations = TextDecorations.Strikethrough;
-                        taskControl.task_title.Opacity = 0.4;
-                        taskControl.task_time.Opacity = 0.4;
-                        // Добавляем эффект тени
-                        taskControl.Effect = new DropShadowEffect { BlurRadius = 10, ShadowDepth = 5, Opacity = 0.2 };
-                        taskControl.MouseDoubleClick += TaskControl_MouseDoubleClick;
-                        taskControl.Margin = new Thickness(5);
-                        taskControl.check.Visibility = Visibility.Visible;
-                        // Добавляем TaskControl в StackPanel
-                        stackPanel.Children.Add(taskControl);
-                    }
-                }
-        }
-        
+        //                TaskControl taskControl = new TaskControl();
+        //                // Устанавливаем значения для task_title и task_time
+        //                taskControl.task_title.Text = task.title;
+        //                taskControl.task_time.Text = task.category;
+        //                taskControl.task_title.TextDecorations = TextDecorations.Strikethrough;
+        //                taskControl.task_time.TextDecorations = TextDecorations.Strikethrough;
+        //                taskControl.task_title.Opacity = 0.4;
+        //                taskControl.task_time.Opacity = 0.4;
+        //                // Добавляем эффект тени
+        //                taskControl.Effect = new DropShadowEffect { BlurRadius = 10, ShadowDepth = 5, Opacity = 0.2 };
+        //                taskControl.MouseDoubleClick += TaskControl_MouseDoubleClick;
+        //                taskControl.Margin = new Thickness(5);
+        //                taskControl.check.Visibility = Visibility.Visible;
+        //                // Добавляем TaskControl в StackPanel
+        //                stackPanel.Children.Add(taskControl);
+
+        //            }
+        //        }
+        //    }
+        //}
 
 
         private void nameLabel_Initialized(object sender, EventArgs e)
@@ -85,6 +90,28 @@ namespace todo.View
         {
             AppFrame.frameMain.GoBack();
         }
+
+
+        //private async void TaskControl_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        //{
+        //    var tasks = await TaskRepository.GetAllUserTasks();
+
+        //    TaskControl currentTaskControl = sender as TaskControl;
+
+        //    string name = currentTaskControl.task_title.Text;
+
+        //    foreach (var task in tasks)
+        //    {
+        //        if (name == task.title)
+        //        {
+        //            title_task_label.Text = task.title;
+        //            time_task_label.Text = task.category;
+        //            date_task_label.Text = task.date.ToString();
+        //            description_task_label.Text = task.description;
+        //        }
+        //    }
+
+        //}
 
         private void TaskControl_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
@@ -106,25 +133,60 @@ namespace todo.View
                 }
             }
 
-           /* foreach (var child in stackpanel_with_tasks.Children)
-            {
-                // Проверяем, является ли элемент TaskControl
-                if (child is TaskControl taskControl)
-                {
-                    // Устанавливаем свойство Background в White
-                    taskControl.fon.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#ABF294"));
-                }
-            }
 
-            
+            /* foreach (var child in stackpanel_with_tasks.Children)
+             {
+                 // Проверяем, является ли элемент TaskControl
+                 if (child is TaskControl taskControl)
+                 {
+                     // Устанавливаем свойство Background в White
+                     taskControl.fon.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#ABF294"));
+                 }
+             }
 
-            
 
-            */
+
+
+
+             */
             //currentTaskControl.fon.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#ABF294")); 
 
-            
 
+
+        }
+
+        private void LoadTasks()
+        {
+
+
+            // Очищаем StackPanel перед добавлением новых элементов
+            scroll_tasks.Content = new StackPanel();
+            var stackPanel = (StackPanel)scroll_tasks.Content;
+
+
+            // Проходимся по списку задач и создаем TaskControl для каждой
+            foreach (var task in context.TaskModel)
+            {
+                // Создаем новый TaskControl
+                if (task.Completed == true)
+                {
+                    TaskControl taskControl = new TaskControl();
+                    // Устанавливаем значения для task_title и task_time
+                    taskControl.task_title.Text = task.Name;
+                    taskControl.task_time.Text = task.Time;
+                    taskControl.task_title.TextDecorations = TextDecorations.Strikethrough;
+                    taskControl.task_time.TextDecorations = TextDecorations.Strikethrough;
+                    taskControl.task_title.Opacity = 0.4;
+                    taskControl.task_time.Opacity = 0.4;
+                    // Добавляем эффект тени
+                    taskControl.Effect = new DropShadowEffect { BlurRadius = 10, ShadowDepth = 5, Opacity = 0.2 };
+                    taskControl.MouseDoubleClick += TaskControl_MouseDoubleClick;
+                    taskControl.Margin = new Thickness(5);
+                    taskControl.check.Visibility = Visibility.Visible;
+                    // Добавляем TaskControl в StackPanel
+                    stackPanel.Children.Add(taskControl);
+                }
+            }
         }
     }
 }

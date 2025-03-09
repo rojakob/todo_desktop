@@ -33,14 +33,21 @@ namespace todo.View
             AppFrame.frameMain.GoBack();
         }
 
-        private void btn_task_crate_Click(object sender, RoutedEventArgs e)
+        private async void btn_task_crate_Click(object sender, RoutedEventArgs e)
         {
             string theDate = dp_date.SelectedDate.Value.ToString();
-            int nomer = UserRepository.currentUser.Id_user; 
+            int nomer = UserRepository.currentUser.Id_user;
 
             TaskRepository.AddTask(txb_title.Text, txb_description.Text, txb_category.Text, theDate, txb_timepicker.Text, false, nomer);
 
-            AppFrame.frameMain.Navigate(new PageMain());
+            bool istaskcreated = await TaskRepository.AddTaskAPI(txb_title.Text, txb_description.Text, txb_category.Text);
+            if (istaskcreated)
+            {
+                
+                AppFrame.frameMain.Navigate(new PageMain());
+            }
+
+            
         }
     }
 }

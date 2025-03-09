@@ -32,9 +32,9 @@ namespace todo.View
             AppFrame.frameMain.GoBack();
         }
 
-        private void regbut2_Click(object sender, RoutedEventArgs e)
+        private async void regbut2_Click(object sender, RoutedEventArgs e)
         {
-            var name = name_textbox.Text;
+            string name = name_textbox.Text;
             var email = email_textbox.Text;
             var pass1 = pass1_textbox.Text;
             var pass2 = pass2_textbox.Text;
@@ -49,7 +49,16 @@ namespace todo.View
                 return;
             }
 
-            AppFrame.frameMain.Navigate(new PageMainEmpty());
+            bool isRegisterSuccessful = await UserRepository.GetInstance().RegisterAPI( name, email, pass1);
+
+            if (isRegisterSuccessful)
+            {
+                AppFrame.frameMain.Navigate(new PageMainEmpty());
+            }
+
+            
+
+           
         }
     }
 }

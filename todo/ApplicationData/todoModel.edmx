@@ -17,9 +17,10 @@
         </EntityType>
         <EntityType Name="TaskModel">
           <Key>
-            <PropertyRef Name="Id_task" />
+            <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id_task" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Id_Task" Type="nvarchar(max)" />
           <Property Name="Name" Type="nvarchar" MaxLength="50" />
           <Property Name="Description" Type="nvarchar(max)" />
           <Property Name="Category" Type="nvarchar" MaxLength="50" />
@@ -36,6 +37,7 @@
           <Property Name="Name" Type="nvarchar" MaxLength="50" />
           <Property Name="Email" Type="nvarchar" MaxLength="50" />
           <Property Name="Pass" Type="nvarchar" MaxLength="50" />
+          <Property Name="Token" Type="nvarchar(max)" />
         </EntityType>
         <Association Name="FK_TaskModel_UserModel">
           <End Role="UserModel" Type="Self.UserModel" Multiplicity="0..1" />
@@ -106,9 +108,10 @@
         </EntityType>
         <EntityType Name="TaskModel">
           <Key>
-            <PropertyRef Name="Id_task" />
+            <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id_task" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Id_Task" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Category" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
@@ -126,6 +129,7 @@
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Pass" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Token" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="TaskModel" Relationship="Self.FK_TaskModel_UserModel" FromRole="UserModel" ToRole="TaskModel" />
         </EntityType>
         <Association Name="FK_TaskModel_UserModel">
@@ -210,7 +214,8 @@
           <EntitySetMapping Name="TaskModel">
             <EntityTypeMapping TypeName="todoModel.TaskModel">
               <MappingFragment StoreEntitySet="TaskModel">
-                <ScalarProperty Name="Id_task" ColumnName="Id_task" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Id_Task" ColumnName="Id_Task" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="Category" ColumnName="Category" />
@@ -228,6 +233,7 @@
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="Pass" ColumnName="Pass" />
+                <ScalarProperty Name="Token" ColumnName="Token" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

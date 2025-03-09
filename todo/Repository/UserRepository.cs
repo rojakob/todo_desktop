@@ -1,7 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 
 using todo.ApplicationData;
@@ -79,6 +83,77 @@ namespace todo.Repository
             return user;
         }
 
+        public async Task<bool> RegisterAPI(string name, string email, string password)
+        {
+            // URL для авторизации
+            string apiUrl = "http://45.144.64.179/api/auth/registration";
+
+            // Создаем тело запроса в формате JSON
+            var requestBody = new
+            {   Name = name,
+                Email = email,
+                Password = password
+            };
+
+            // Сериализуем тело запроса в JSON
+            string jsonBody = JsonSerializer.Serialize(requestBody);
+
+
+            // Создаем HttpClient
+            using (HttpClient client = new HttpClient())
+            {
+                // Устанавливаем заголовок Content-Type для JSON
+                client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+
+                // Создаем содержимое запроса
+                var content = new StringContent(jsonBody, Encoding.UTF8, "application/json");
+
+                try
+                {
+                    // Выполняем POST-запрос
+                    HttpResponseMessage response = await client.PostAsync(apiUrl, content);
+
+                    // Проверяем, успешен ли запрос
+                    if (response.IsSuccessStatusCode)
+                    {
+                        // Читаем ответ как строку
+                        string responseData = await response.Content.ReadAsStringAsync();
+
+
+
+                        // Десериализуем ответ в объект
+                        var responseObject = JsonSerializer.Deserialize<LoginResponse>(responseData);
+
+                        // Получаем токен из ответа
+                        string accessToken = responseObject.data.access_token;
+
+
+
+
+                        // Сохраняем токен в базу данных
+                        using (var context = new todoEntities())
+                        {
+                            var User = context.UserModel.FirstOrDefault(user => user.Email == email);
+                            User.Token = accessToken.ToString();
+                            context.SaveChanges();
+                        }
+
+                        return true; // Успешная авторизация
+                    }
+                    else
+                    {
+                        Console.WriteLine("Ошибка: " + response.StatusCode);
+                        return false; // Ошибка авторизации
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Исключение: " + ex.Message);
+                    return false; // Ошибка при выполнении запроса
+                }
+            }
+        }
+
         public UserModel Login(string email, string password)
         {
             var userResult = GetUserByEmail(email);
@@ -96,5 +171,120 @@ namespace todo.Repository
             currentUser = userResult;
             return userResult;
         }
+
+        // Класс для десериализации ответа от API
+        public class LoginResponse
+        {
+            public Data data { get; set; }
+        }
+
+        public class Data
+        {
+            public string access_token { get; set; }
+        }
+
+        public async Task<bool> LoginAPI(string email, string password)
+        {
+            // URL для авторизации
+            string apiUrl = "http://45.144.64.179/api/auth/login";
+
+            // Создаем тело запроса в формате JSON
+            var requestBody = new
+            {
+                Email = email,
+                Password = password
+            };
+
+            // Сериализуем тело запроса в JSON
+            string jsonBody = JsonSerializer.Serialize(requestBody);
+
+
+            // Создаем HttpClient
+            using (HttpClient client = new HttpClient())
+            {
+                // Устанавливаем заголовок Content-Type для JSON
+                client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+
+                // Создаем содержимое запроса
+                var content = new StringContent(jsonBody, Encoding.UTF8, "application/json");
+
+                try
+                {
+                    // Выполняем POST-запрос
+                    HttpResponseMessage response = await client.PostAsync(apiUrl, content);
+
+                    // Проверяем, успешен ли запрос
+                    if (response.IsSuccessStatusCode)
+                    {
+                        // Читаем ответ как строку
+                        string responseData = await response.Content.ReadAsStringAsync();
+
+                        
+
+                        // Десериализуем ответ в объект
+                        var responseObject = JsonSerializer.Deserialize<LoginResponse>(responseData);
+
+                        // Получаем токен из ответа
+                        string accessToken = responseObject.data.access_token;
+
+
+
+
+                        // Сохраняем токен в базу данных
+                        using (var context = new todoEntities())
+                        {
+                            var User = context.UserModel.FirstOrDefault(user => user.Email == email);
+                            User.Token = accessToken.ToString();
+                            context.SaveChanges();
+                        }
+
+                        return true; // Успешная авторизация
+                    }
+                    else
+                    {
+                        Console.WriteLine("Ошибка: " + response.StatusCode);
+                        return false; // Ошибка авторизации
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Исключение: " + ex.Message);
+                    return false; // Ошибка при выполнении запроса
+                }
+            }
+        }
+
+        public async static void GetUserInfo()
+        {
+            string token = currentUser.Token;
+
+            string url = "http://45.144.64.179/api/user";
+
+            using (HttpClient client = new HttpClient())
+            {
+                // Устанавливаем хедер авторизации
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+
+                try 
+                {
+                    // Создаем объект класса HttpResponseMessage который будет содержать в себе ответ от сервера после гет запроса 
+                    HttpResponseMessage response = await client.GetAsync(url);
+
+                    // Читаем ответ как строку
+                    string responseData = await response.Content.ReadAsStringAsync();
+
+                    //Выведем ответ в консоль, чтобы чекнуть ответ самостоятельно
+                    Console.WriteLine(responseData);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Исключение: " + ex.Message);
+                }
+            }
+        }
     }
+
+
+
 }
+

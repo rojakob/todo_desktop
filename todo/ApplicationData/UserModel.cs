@@ -24,6 +24,7 @@ namespace todo.ApplicationData
         public string Name { get; set; }
         public string Email { get; set; }
         public string Pass { get; set; }
+        public string Token { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TaskModel> TaskModel { get; set; }

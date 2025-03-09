@@ -14,7 +14,8 @@ namespace todo.ApplicationData
     
     public partial class TaskModel
     {
-        public int Id_task { get; set; }
+        public int Id { get; set; }
+        public string Id_Task { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
         public string Category { get; set; }
