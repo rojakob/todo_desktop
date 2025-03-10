@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -14,6 +15,17 @@ namespace todo.Repository
 {
     internal class UserRepository
     {
+
+        public static UserModel GetUserByToken(string token)
+        {
+            using (var context = new todoEntities())
+            {
+                // Проверяем, есть ли задачи у пользователя с указанным ID
+                UserModel userResult = context.UserModel.FirstOrDefault(user => user.Token == token);
+                currentUser = userResult;
+                return userResult;
+            }
+        }
 
         public static bool UserHasTasks(int userId)
         {
@@ -90,7 +102,8 @@ namespace todo.Repository
 
             // Создаем тело запроса в формате JSON
             var requestBody = new
-            {   Name = name,
+            {
+                Name = name,
                 Email = email,
                 Password = password
             };
@@ -127,7 +140,13 @@ namespace todo.Repository
                         // Получаем токен из ответа
                         string accessToken = responseObject.data.access_token;
 
-
+                        string localAppDataPath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
+                        string appFolder = System.IO.Path.Combine(localAppDataPath, "todo");
+                        Directory.CreateDirectory(appFolder);
+                        string filePath = System.IO.Path.Combine(appFolder, "token.json");
+                        var tokenData = new { Token = accessToken };
+                        string jsonAuthFile = JsonSerializer.Serialize(tokenData);
+                        File.WriteAllText(filePath, jsonAuthFile);
 
 
                         // Сохраняем токен в базу данных
@@ -219,7 +238,7 @@ namespace todo.Repository
                         // Читаем ответ как строку
                         string responseData = await response.Content.ReadAsStringAsync();
 
-                        
+
 
                         // Десериализуем ответ в объект
                         var responseObject = JsonSerializer.Deserialize<LoginResponse>(responseData);
@@ -227,8 +246,13 @@ namespace todo.Repository
                         // Получаем токен из ответа
                         string accessToken = responseObject.data.access_token;
 
-
-
+                        string localAppDataPath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
+                        string appFolder = System.IO.Path.Combine(localAppDataPath, "todo");
+                        Directory.CreateDirectory(appFolder);
+                        string filePath = System.IO.Path.Combine(appFolder, "token.json");
+                        var tokenData = new { Token = accessToken };
+                        string jsonAuthFile = JsonSerializer.Serialize(tokenData);
+                        File.WriteAllText(filePath, jsonAuthFile);
 
                         // Сохраняем токен в базу данных
                         using (var context = new todoEntities())
@@ -265,7 +289,7 @@ namespace todo.Repository
                 // Устанавливаем хедер авторизации
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
 
-                try 
+                try
                 {
                     // Создаем объект класса HttpResponseMessage который будет содержать в себе ответ от сервера после гет запроса 
                     HttpResponseMessage response = await client.GetAsync(url);

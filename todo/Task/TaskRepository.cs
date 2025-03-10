@@ -207,7 +207,7 @@ namespace todo.Task
                         Console.WriteLine("Исключение: " + ex.Message);
                     }
 
-                    
+
                 }
             }
         }
@@ -289,7 +289,7 @@ namespace todo.Task
                         return null; // Возвращаем null в случае ошибки
                     }
 
-                   
+
                 }
                 catch (Exception ex)
                 {
